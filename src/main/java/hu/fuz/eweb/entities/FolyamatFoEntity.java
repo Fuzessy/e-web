@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "FOLYAMAT_FO", schema = "PUBLIC", catalog = "TEST2")
+@Table(name = "FOLYAMAT_FO", schema = "PUBLIC", catalog = "TEST")
 public class FolyamatFoEntity {
     private long foId;
     private String foKod;

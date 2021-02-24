@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "FOLYAMAT_CSOPORT_FCS", schema = "PUBLIC", catalog = "TEST2")
+@Table(name = "FOLYAMAT_CSOPORT_FCS", schema = "PUBLIC", catalog = "TEST")
 public class FolyamatCsoportFcsEntity {
     private long fcsId;
     private String fcsName;
