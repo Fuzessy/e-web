@@ -1,6 +1,7 @@
 package hu.fuz.eweb.entities;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,6 +10,7 @@ public class TanuloTan {
     private long tanId;
     private String tanCsaladiNev;
     private String tanKeresztnev;
+    private List<OviCsoportTanuloCst> oviCsoportTanuloCstsByTanId;
 
     @Id
     @Column(name = "TAN_ID")
@@ -53,5 +55,14 @@ public class TanuloTan {
     @Override
     public int hashCode() {
         return Objects.hash(tanId, tanCsaladiNev, tanKeresztnev);
+    }
+
+    @OneToMany(mappedBy = "tanuloTanByCstTanuoId")
+    public List<OviCsoportTanuloCst> getOviCsoportTanuloCstsByTanId() {
+        return oviCsoportTanuloCstsByTanId;
+    }
+
+    public void setOviCsoportTanuloCstsByTanId(List<OviCsoportTanuloCst> oviCsoportTanuloCstsByTanId) {
+        this.oviCsoportTanuloCstsByTanId = oviCsoportTanuloCstsByTanId;
     }
 }

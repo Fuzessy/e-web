@@ -26,7 +26,7 @@ public class StateSt {
     }
 
     @Basic
-    @Column(name = "FO_ID", insertable = false, updatable = false)
+    @Column(name = "FO_ID")
     public long getFoId() {
         return foId;
     }
@@ -72,7 +72,7 @@ public class StateSt {
     }
 
     @ManyToOne
-    @JoinColumn(name = "FO_ID", referencedColumnName = "FO_ID", nullable = false)
+    @JoinColumn(name = "FO_ID", referencedColumnName = "FO_ID", nullable = false, updatable = false, insertable = false)
     public FolyamatFo getFolyamatFoByFoId() {
         return folyamatFoByFoId;
     }

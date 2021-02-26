@@ -1,4 +1,5 @@
 select
+    tan.TAN_ID,
     OCS.OCS_CSOPORT_NEV,
     DOL.DOL_CSALADI_NEV,
     DOL.DOL_KERESZTNEV,

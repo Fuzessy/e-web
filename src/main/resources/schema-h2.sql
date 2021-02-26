@@ -3,6 +3,9 @@ DROP TABLE IF EXISTS state_st;
 DROP TABLE IF EXISTS folyamat_fo;
 DROP TABLE IF EXISTS folyamat_csoport_fcs;
 
+DROP TABLE IF EXISTS ovi_csoport_tanulo_cst;
+DROP TABLE IF EXISTS ovi_csoport_ocs;
+
 DROP TABLE IF EXISTS folyamat_csoport_fcs;
 CREATE TABLE folyamat_csoport_fcs
 (
@@ -78,3 +81,9 @@ ALTER TABLE folyamat_fo ADD CONSTRAINT fk_fo_fcs_id FOREIGN KEY (fcs_id) REFEREN
 ALTER TABLE state_st ADD CONSTRAINT fk_st_fo_id FOREIGN KEY (fo_id) REFERENCES folyamat_fo(fo_id);
 ALTER TABLE transition_tr ADD CONSTRAINT fk_tr_st_id_from FOREIGN KEY (st_id_from) REFERENCES state_st(st_id);
 ALTER TABLE transition_tr ADD CONSTRAINT fk_tr_st_id_to FOREIGN KEY (st_id_to) REFERENCES state_st(st_id);
+
+ALTER TABLE ovi_csoport_ocs ADD CONSTRAINT fk_ocs_vezeto_dol_id FOREIGN KEY (ocs_vezeto_dol_id) REFERENCES dolgozo_dol(dol_id);
+
+
+ALTER TABLE ovi_csoport_tanulo_cst ADD CONSTRAINT fk_cst_csoport_id FOREIGN KEY (cst_csoport_id) REFERENCES ovi_csoport_ocs(ocs_id);
+ALTER TABLE ovi_csoport_tanulo_cst ADD CONSTRAINT fk_cst_tanuo_id FOREIGN KEY (cst_tanuo_id) REFERENCES tanulo_tan(tan_id);

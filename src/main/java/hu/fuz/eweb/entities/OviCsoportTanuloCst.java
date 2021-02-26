@@ -9,6 +9,8 @@ public class OviCsoportTanuloCst {
     private long cstId;
     private long cstCsoportId;
     private long cstTanuoId;
+    private OviCsoportOcs oviCsoportOcsByCstCsoportId;
+    private TanuloTan tanuloTanByCstTanuoId;
 
     @Id
     @Column(name = "CST_ID")
@@ -53,5 +55,25 @@ public class OviCsoportTanuloCst {
     @Override
     public int hashCode() {
         return Objects.hash(cstId, cstCsoportId, cstTanuoId);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "CST_CSOPORT_ID", referencedColumnName = "OCS_ID", nullable = false, updatable = false, insertable = false)
+    public OviCsoportOcs getOviCsoportOcsByCstCsoportId() {
+        return oviCsoportOcsByCstCsoportId;
+    }
+
+    public void setOviCsoportOcsByCstCsoportId(OviCsoportOcs oviCsoportOcsByCstCsoportId) {
+        this.oviCsoportOcsByCstCsoportId = oviCsoportOcsByCstCsoportId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "CST_TANUO_ID", referencedColumnName = "TAN_ID", nullable = false, updatable = false, insertable = false)
+    public TanuloTan getTanuloTanByCstTanuoId() {
+        return tanuloTanByCstTanuoId;
+    }
+
+    public void setTanuloTanByCstTanuoId(TanuloTan tanuloTanByCstTanuoId) {
+        this.tanuloTanByCstTanuoId = tanuloTanByCstTanuoId;
     }
 }

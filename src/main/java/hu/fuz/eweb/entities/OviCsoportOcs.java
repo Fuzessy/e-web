@@ -1,6 +1,7 @@
 package hu.fuz.eweb.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -9,6 +10,8 @@ public class OviCsoportOcs {
     private long ocsId;
     private String ocsCsoportNev;
     private long ocsVezetoDolId;
+    private DolgozoDol dolgozoDolByOcsVezetoDolId;
+    private Collection<OviCsoportTanuloCst> oviCsoportTanuloCstsByOcsId;
 
     @Id
     @Column(name = "OCS_ID")
@@ -53,5 +56,24 @@ public class OviCsoportOcs {
     @Override
     public int hashCode() {
         return Objects.hash(ocsId, ocsCsoportNev, ocsVezetoDolId);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "OCS_VEZETO_DOL_ID", referencedColumnName = "DOL_ID", nullable = false, updatable = false, insertable = false)
+    public DolgozoDol getDolgozoDolByOcsVezetoDolId() {
+        return dolgozoDolByOcsVezetoDolId;
+    }
+
+    public void setDolgozoDolByOcsVezetoDolId(DolgozoDol dolgozoDolByOcsVezetoDolId) {
+        this.dolgozoDolByOcsVezetoDolId = dolgozoDolByOcsVezetoDolId;
+    }
+
+    @OneToMany(mappedBy = "oviCsoportOcsByCstCsoportId")
+    public Collection<OviCsoportTanuloCst> getOviCsoportTanuloCstsByOcsId() {
+        return oviCsoportTanuloCstsByOcsId;
+    }
+
+    public void setOviCsoportTanuloCstsByOcsId(Collection<OviCsoportTanuloCst> oviCsoportTanuloCstsByOcsId) {
+        this.oviCsoportTanuloCstsByOcsId = oviCsoportTanuloCstsByOcsId;
     }
 }

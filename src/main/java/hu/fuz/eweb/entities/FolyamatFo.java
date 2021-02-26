@@ -1,7 +1,7 @@
 package hu.fuz.eweb.entities;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,10 +9,10 @@ import java.util.Objects;
 public class FolyamatFo {
     private long foId;
     private String foCode;
+    private String fcsId;
     private String foName;
     private FolyamatCsoportFcs folyamatCsoportFcsByFcsId;
-    private Collection<StateSt> stateStsByFoId;
-    private String fcsId;
+    private List<StateSt> stateStsByFoId;
 
     @Id
     @Column(name = "FO_ID")
@@ -35,6 +35,16 @@ public class FolyamatFo {
     }
 
     @Basic
+    @Column(name = "FCS_ID")
+    public String getFcsId() {
+        return fcsId;
+    }
+
+    public void setFcsId(String fcsId) {
+        this.fcsId = fcsId;
+    }
+
+    @Basic
     @Column(name = "FO_NAME")
     public String getFoName() {
         return foName;
@@ -51,16 +61,17 @@ public class FolyamatFo {
         FolyamatFo that = (FolyamatFo) o;
         return foId == that.foId &&
                 Objects.equals(foCode, that.foCode) &&
+                Objects.equals(fcsId, that.fcsId) &&
                 Objects.equals(foName, that.foName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(foId, foCode, foName);
+        return Objects.hash(foId, foCode, fcsId, foName);
     }
 
     @ManyToOne
-    @JoinColumn(name = "FCS_ID", referencedColumnName = "FCS_ID", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "FCS_ID", referencedColumnName = "FCS_ID", nullable = false, updatable = false, insertable = false)
     public FolyamatCsoportFcs getFolyamatCsoportFcsByFcsId() {
         return folyamatCsoportFcsByFcsId;
     }
@@ -70,21 +81,11 @@ public class FolyamatFo {
     }
 
     @OneToMany(mappedBy = "folyamatFoByFoId")
-    public Collection<StateSt> getStateStsByFoId() {
+    public List<StateSt> getStateStsByFoId() {
         return stateStsByFoId;
     }
 
-    public void setStateStsByFoId(Collection<StateSt> stateStsByFoId) {
+    public void setStateStsByFoId(List<StateSt> stateStsByFoId) {
         this.stateStsByFoId = stateStsByFoId;
-    }
-
-    @Basic
-    @Column(name = "FCS_ID")
-    public String getFcsId() {
-        return fcsId;
-    }
-
-    public void setFcsId(String fcsId) {
-        this.fcsId = fcsId;
     }
 }

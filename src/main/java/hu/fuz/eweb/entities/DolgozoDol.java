@@ -1,6 +1,8 @@
 package hu.fuz.eweb.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +12,7 @@ public class DolgozoDol {
     private String dolCsaladiNev;
     private String dolKeresztnev;
     private String dolBeosztas;
+    private List<OviCsoportOcs> oviCsoportOcsByDolId;
 
     @Id
     @Column(name = "DOL_ID")
@@ -65,5 +68,14 @@ public class DolgozoDol {
     @Override
     public int hashCode() {
         return Objects.hash(dolId, dolCsaladiNev, dolKeresztnev, dolBeosztas);
+    }
+
+    @OneToMany(mappedBy = "dolgozoDolByOcsVezetoDolId")
+    public Collection<OviCsoportOcs> getOviCsoportOcsByDolId() {
+        return oviCsoportOcsByDolId;
+    }
+
+    public void setOviCsoportOcsByDolId(List<OviCsoportOcs> oviCsoportOcsByDolId) {
+        this.oviCsoportOcsByDolId = oviCsoportOcsByDolId;
     }
 }

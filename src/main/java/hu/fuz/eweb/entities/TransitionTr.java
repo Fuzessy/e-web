@@ -7,11 +7,11 @@ import java.util.Objects;
 @Table(name = "TRANSITION_TR", schema = "PUBLIC", catalog = "TEST")
 public class TransitionTr {
     private long trId;
+    private long stIdFrom;
+    private long stIdTo;
     private String stName;
     private StateSt stateStByStIdFrom;
     private StateSt stateStByStIdTo;
-    private long stIdFrom;
-    private long stIdTo;
 
     @Id
     @Column(name = "TR_ID")
@@ -21,6 +21,26 @@ public class TransitionTr {
 
     public void setTrId(long trId) {
         this.trId = trId;
+    }
+
+    @Basic
+    @Column(name = "ST_ID_FROM")
+    public long getStIdFrom() {
+        return stIdFrom;
+    }
+
+    public void setStIdFrom(long stIdFrom) {
+        this.stIdFrom = stIdFrom;
+    }
+
+    @Basic
+    @Column(name = "ST_ID_TO")
+    public long getStIdTo() {
+        return stIdTo;
+    }
+
+    public void setStIdTo(long stIdTo) {
+        this.stIdTo = stIdTo;
     }
 
     @Basic
@@ -50,7 +70,7 @@ public class TransitionTr {
     }
 
     @ManyToOne
-    @JoinColumn(name = "ST_ID_FROM", referencedColumnName = "ST_ID", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "ST_ID_FROM", referencedColumnName = "ST_ID", nullable = false, updatable = false, insertable = false)
     public StateSt getStateStByStIdFrom() {
         return stateStByStIdFrom;
     }
@@ -60,32 +80,12 @@ public class TransitionTr {
     }
 
     @ManyToOne
-    @JoinColumn(name = "ST_ID_TO", referencedColumnName = "ST_ID", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "ST_ID_TO", referencedColumnName = "ST_ID", nullable = false, updatable = false, insertable = false)
     public StateSt getStateStByStIdTo() {
         return stateStByStIdTo;
     }
 
     public void setStateStByStIdTo(StateSt stateStByStIdTo) {
         this.stateStByStIdTo = stateStByStIdTo;
-    }
-
-    @Basic
-    @Column(name = "ST_ID_FROM")
-    public long getStIdFrom() {
-        return stIdFrom;
-    }
-
-    public void setStIdFrom(long stIdFrom) {
-        this.stIdFrom = stIdFrom;
-    }
-
-    @Basic
-    @Column(name = "ST_ID_TO")
-    public long getStIdTo() {
-        return stIdTo;
-    }
-
-    public void setStIdTo(long stIdTo) {
-        this.stIdTo = stIdTo;
     }
 }
