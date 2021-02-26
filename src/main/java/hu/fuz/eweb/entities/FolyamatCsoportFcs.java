@@ -1,17 +1,15 @@
 package hu.fuz.eweb.entities;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.*;
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "FOLYAMAT_CSOPORT_FCS", schema = "PUBLIC", catalog = "TEST")
-public class FolyamatCsoportFcsEntity {
+public class FolyamatCsoportFcs {
     private long fcsId;
     private String fcsName;
-    private List<FolyamatFoEntity> processes;
+    private Collection<FolyamatFo> folyamatFosByFcsId;
 
     @Id
     @Column(name = "FCS_ID")
@@ -33,21 +31,11 @@ public class FolyamatCsoportFcsEntity {
         this.fcsName = fcsName;
     }
 
-    @OneToMany
-    @JoinColumn(name = "FCS_ID")
-    public List<FolyamatFoEntity> getProcesses(){
-        return processes;
-    }
-
-    public void setProcesses(List<FolyamatFoEntity> processes){
-        this.processes = processes;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FolyamatCsoportFcsEntity that = (FolyamatCsoportFcsEntity) o;
+        FolyamatCsoportFcs that = (FolyamatCsoportFcs) o;
         return fcsId == that.fcsId &&
                 Objects.equals(fcsName, that.fcsName);
     }
@@ -57,12 +45,12 @@ public class FolyamatCsoportFcsEntity {
         return Objects.hash(fcsId, fcsName);
     }
 
-    @Override
-    public String toString() {
-        return "FolyamatCsoportFcsEntity{" +
-                "fcsId=" + fcsId +
-                ", fcsName='" + fcsName + '\'' +
-                ", processes=" + processes +
-                '}';
+    @OneToMany(mappedBy = "folyamatCsoportFcsByFcsId")
+    public Collection<FolyamatFo> getFolyamatFosByFcsId() {
+        return folyamatFosByFcsId;
+    }
+
+    public void setFolyamatFosByFcsId(Collection<FolyamatFo> folyamatFosByFcsId) {
+        this.folyamatFosByFcsId = folyamatFosByFcsId;
     }
 }

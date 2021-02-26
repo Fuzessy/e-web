@@ -24,7 +24,7 @@ public class SpringTest {
 //        System.out.println(processRepository.getProcesses());
         System.out.println(processRepository.getOne(1L));
         System.out.println(processRepository.getOne(2L));
-        System.out.println(processRepository.getOne(2L).getProcesses());
+        System.out.println(processRepository.getOne(2L).getFolyamatFosByFcsId());
         //System.out.println(processRepository.getProcesses().get(0).getProcesses());
     }
 }
