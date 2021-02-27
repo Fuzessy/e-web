@@ -2,6 +2,7 @@ package hu.fuz.eweb.entities;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,8 +13,8 @@ public class StateSt {
     private String stCode;
     private String stDescription;
     private FolyamatFo folyamatFoByFoId;
-    private Collection<TransitionTr> transitionTrsByStId;
-    private Collection<TransitionTr> transitionTrsByStId_0;
+    private List<TransitionTr> transitionTrsByStId;
+    private List<TransitionTr> transitionTrsByStId_0;
 
     @Id
     @Column(name = "ST_ID")
@@ -82,20 +83,20 @@ public class StateSt {
     }
 
     @OneToMany(mappedBy = "stateStByStIdFrom")
-    public Collection<TransitionTr> getTransitionTrsByStId() {
+    public List<TransitionTr> getTransitionTrsByStId() {
         return transitionTrsByStId;
     }
 
-    public void setTransitionTrsByStId(Collection<TransitionTr> transitionTrsByStId) {
+    public void setTransitionTrsByStId(List<TransitionTr> transitionTrsByStId) {
         this.transitionTrsByStId = transitionTrsByStId;
     }
 
     @OneToMany(mappedBy = "stateStByStIdTo")
-    public Collection<TransitionTr> getTransitionTrsByStId_0() {
+    public List<TransitionTr> getTransitionTrsByStId_0() {
         return transitionTrsByStId_0;
     }
 
-    public void setTransitionTrsByStId_0(Collection<TransitionTr> transitionTrsByStId_0) {
+    public void setTransitionTrsByStId_0(List<TransitionTr> transitionTrsByStId_0) {
         this.transitionTrsByStId_0 = transitionTrsByStId_0;
     }
 }

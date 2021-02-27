@@ -1,7 +1,9 @@
 package hu.fuz.eweb.process;
 
 import hu.fuz.eweb.process.model.ProcessDTO;
+import hu.fuz.eweb.process.model.ProcessStatusDTO;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +22,10 @@ public class ProcessController {
     @GetMapping
     public List<ProcessDTO> getProcess(){
         return processService.getProcesses();
+    }
+
+    @GetMapping("/{processId}")
+    public ProcessStatusDTO getProcessStatus(@PathVariable("processId") long processId){
+        return processService.getProcessTatusByProcessId(processId);
     }
 }
