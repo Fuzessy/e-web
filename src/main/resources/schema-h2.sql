@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS process_pr;
 DROP TABLE IF EXISTS transition_tr;
 DROP TABLE IF EXISTS state_st;
 DROP TABLE IF EXISTS folyamat_fo;
@@ -38,6 +39,13 @@ CREATE TABLE transition_tr
     st_id_from      BIGINT NOT NULL,
     st_id_to        BIGINT NOT NULL,
     st_name         VARCHAR(50) NOT NULL
+);
+
+DROP TABLE IF EXISTS process_pr;
+CREATE TABLE process_pr
+(
+    pr_id               BIGINT AUTO_INCREMENT PRIMARY KEY,
+    pr_actual_st_id     BIGINT NOT NULL
 );
 
 DROP TABLE IF EXISTS tanulo_tan;
@@ -81,9 +89,8 @@ ALTER TABLE folyamat_fo ADD CONSTRAINT fk_fo_fcs_id FOREIGN KEY (fcs_id) REFEREN
 ALTER TABLE state_st ADD CONSTRAINT fk_st_fo_id FOREIGN KEY (fo_id) REFERENCES folyamat_fo(fo_id);
 ALTER TABLE transition_tr ADD CONSTRAINT fk_tr_st_id_from FOREIGN KEY (st_id_from) REFERENCES state_st(st_id);
 ALTER TABLE transition_tr ADD CONSTRAINT fk_tr_st_id_to FOREIGN KEY (st_id_to) REFERENCES state_st(st_id);
+ALTER TABLE process_pr ADD CONSTRAINT fk_pr_actual_st_id FOREIGN KEY (pr_actual_st_id) REFERENCES state_st(st_id);
 
 ALTER TABLE ovi_csoport_ocs ADD CONSTRAINT fk_ocs_vezeto_dol_id FOREIGN KEY (ocs_vezeto_dol_id) REFERENCES dolgozo_dol(dol_id);
-
-
 ALTER TABLE ovi_csoport_tanulo_cst ADD CONSTRAINT fk_cst_csoport_id FOREIGN KEY (cst_csoport_id) REFERENCES ovi_csoport_ocs(ocs_id);
 ALTER TABLE ovi_csoport_tanulo_cst ADD CONSTRAINT fk_cst_tanuo_id FOREIGN KEY (cst_tanuo_id) REFERENCES tanulo_tan(tan_id);
